@@ -18,8 +18,13 @@ config TARGET_IMXRT1050_EVK
 	bool "Support imxrt1050 EVK board"
 	select IMXRT1050
 
+config TARGET_IMXRT105X_ZPL
+    bool "Support imxrt1052 ZPL board"
+    select IMXRT1050
+
 endchoice
 
 source "board/freescale/imxrt1050-evk/Kconfig"
+source "board/freescale/imxrt105x-zb/Kconfig"
 
 endif

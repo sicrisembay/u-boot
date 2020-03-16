@@ -1,0 +1,9 @@
+How to use U-Boot on Zimplistic i.MXRT1052 Board
+------------------------------------------------
+
+- Build U-Boot:
+
+$ make mrproper
+$ make imxrt105x-zb_defconfig
+$ make
+

@@ -1,0 +1,22 @@
+if TARGET_IMXRT105X_ZPL
+
+config SYS_BOARD
+	string
+	default "imxrt105x-zb"
+
+config SYS_VENDOR
+	string
+	default "freescale"
+
+config SYS_SOC
+	string
+	default "imxrt1050"
+
+config SYS_CONFIG_NAME
+	string
+	default "imxrt105x-zb"
+
+config IMX_CONFIG
+	default "board/freescale/imxrt105x-zb/imximage.cfg"
+
+endif
