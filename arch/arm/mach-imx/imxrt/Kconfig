@@ -17,6 +17,8 @@ choice
 config TARGET_IMXRT1050_EVK
 	bool "Support imxrt1050 EVK board"
 	select IMXRT1050
+    select SUPPORT_SPL
+	
 
 config TARGET_IMXRT105X_ZPL
     bool "Support imxrt1052 ZPL board"

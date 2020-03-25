@@ -9,24 +9,30 @@
 
 #include <asm/arch/imx-regs.h>
 
-#define CONFIG_SYS_INIT_SP_ADDR		0x20280000
+#define DEBUG                       (1)
+#define CONFIG_SYS_INIT_SP_ADDR     0x80800000
 
-#ifdef CONFIG_SUPPORT_SPL
-#define CONFIG_SYS_LOAD_ADDR		0x20209000
-#else
-#define CONFIG_SYS_LOAD_ADDR		0x80000000
-#define CONFIG_LOADADDR			0x80000000
-#endif
+/*
+ * To get Image data right at the 'Load Address' (0x80008000), and thus avoid
+ * additional uImage relocation:
+ * - 0x80007fc0 reserve place for uImage header; two separate image/dtb files
+ * - 0x80007fb4 reserve place for 2-files multi-image header; one image+dtb file
+ *
+ * Note, that unaligned address can't be used when load from FAT as this results
+ * to the slow copy path (and 'FAT: Misaligned buffer address') in fs/fat/fat.c.
+ */
+#define CONFIG_SYS_LOAD_ADDR        0x80007fc0
+#define CONFIG_LOADADDR             0x80007fc0
 
 #define CONFIG_SYS_FSL_ERRATUM_ESDHC135		1
 #define ESDHCI_QUIRK_BROKEN_TIMEOUT_VALUE	1
 
-#define PHYS_SDRAM			0x80000000
-#define PHYS_SDRAM_SIZE			(32 * 1024 * 1024)
+#define PHYS_SDRAM                  0x80000000
+#define PHYS_SDRAM_SIZE             (16 * 1024 * 1024)
 
-#define DMAMEM_SZ_ALL			(1 * 1024 * 1024)
-#define DMAMEM_BASE			(PHYS_SDRAM + PHYS_SDRAM_SIZE - \
-					 DMAMEM_SZ_ALL)
+#define DMAMEM_SZ_ALL               (1 * 1024 * 1024)
+#define DMAMEM_BASE                 (PHYS_SDRAM + PHYS_SDRAM_SIZE - \
+                                        DMAMEM_SZ_ALL)
 
 #define CONFIG_SYS_MMC_ENV_DEV		0   /* USDHC1 */
 
@@ -34,13 +40,5 @@
  * Configuration of the external SDRAM memory
  */
 #define CONFIG_SYS_MALLOC_LEN		(1 * 1024 * 1024)
-
-/* For SPL */
-#ifdef CONFIG_SUPPORT_SPL
-#define CONFIG_SPL_STACK		CONFIG_SYS_INIT_SP_ADDR
-#define CONFIG_SYS_SPL_LEN		0x00008000
-#define CONFIG_SYS_UBOOT_START		0x800023FD
-#endif
-/* For SPL ends */
 
 #endif /* __IMXRT105X_ZB_H */

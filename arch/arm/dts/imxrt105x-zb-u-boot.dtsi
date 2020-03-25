@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
+/*
+ * Copyright (C) 2020
+ * Author(s): Sicris Rey Embay <sicris.embay@gmail.com>
+ */
+
+/ {
+	chosen {
+        u-boot,dm-pre-reloc;
+	};
+};
+
+&lpuart1 { /* console */
+    u-boot,dm-pre-reloc;
+};
+
+&semc {
+	bank1: bank@0 {
+        u-boot,dm-pre-reloc;
+	};
+};
+
+&iomuxc {
+    u-boot,dm-pre-reloc;
+    
+	imxrt1050-zb {
+        u-boot,dm-pre-reloc;
+        
+		pinctrl_lpuart1: lpuart1grp {
+            u-boot,dm-pre-reloc;
+		};
+
+		pinctrl_semc: semcgrp {
+            u-boot,dm-pre-reloc;
+		};
+	};
+};

@@ -809,7 +809,6 @@ config ARCH_IMXRT
 	select CPU_V7M
 	select DM
 	select DM_SERIAL
-	select SUPPORT_SPL
 	imply CMD_DM
 
 config ARCH_MX23
