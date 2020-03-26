@@ -23,10 +23,10 @@
 	};
 
 	clocks {
-        u-boot,dm-pre-reloc;
+        u-boot,dm-pre-proper;
         
 		osc {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imx-osc", "fixed-clock";
 			#clock-cells = <0>;
 			clock-frequency = <24000000>;
@@ -34,10 +34,10 @@
 	};
 
 	soc {
-        u-boot,dm-pre-reloc;
+        u-boot,dm-pre-proper;
         
 		semc: semc@402f0000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-semc";
 			reg = <0x402f0000 0x4000>;
 			clocks = <&clks IMXRT1050_CLK_SEMC>;
@@ -62,7 +62,7 @@
 		};
 
 		clks: ccm@400fc000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt1050-ccm";
 			reg = <0x400fc000 0x4000>;
 			interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>,
@@ -71,7 +71,7 @@
 		};
 
 		usdhc1: usdhc@402c0000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-usdhc";
 			reg = <0x402c0000 0x10000>;
 			interrupts = <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>;
@@ -84,7 +84,7 @@
 		};
 
 		gpio1: gpio@401b8000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-gpio", "fsl,imx35-gpio";
 			reg = <0x401b8000 0x4000>;
 			interrupts = <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>,
@@ -96,7 +96,7 @@
 		};
 
 		gpio2: gpio@401bc000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-gpio", "fsl,imx35-gpio";
 			reg = <0x401bc000 0x4000>;
 			interrupts = <GIC_SPI 82 IRQ_TYPE_LEVEL_HIGH>,
@@ -108,7 +108,7 @@
 		};
 
 		gpio3: gpio@401c0000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-gpio", "fsl,imx35-gpio";
 			reg = <0x401c0000 0x4000>;
 			interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>,
@@ -120,7 +120,7 @@
 		};
 
 		gpio4: gpio@401c4000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-gpio", "fsl,imx35-gpio";
 			reg = <0x401c4000 0x4000>;
 			interrupts = <GIC_SPI 86 IRQ_TYPE_LEVEL_HIGH>,
@@ -132,7 +132,7 @@
 		};
 
 		gpio5: gpio@400c0000 {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 			compatible = "fsl,imxrt-gpio", "fsl,imx35-gpio";
 			reg = <0x400c0000 0x4000>;
 			interrupts = <GIC_SPI 88 IRQ_TYPE_LEVEL_HIGH>,

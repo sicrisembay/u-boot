@@ -6,32 +6,32 @@
 
 / {
 	chosen {
-        u-boot,dm-pre-reloc;
+        u-boot,dm-pre-proper;
 	};
 };
 
 &lpuart1 { /* console */
-    u-boot,dm-pre-reloc;
+    u-boot,dm-pre-proper;
 };
 
 &semc {
 	bank1: bank@0 {
-        u-boot,dm-pre-reloc;
+        u-boot,dm-pre-proper;
 	};
 };
 
 &iomuxc {
-    u-boot,dm-pre-reloc;
+    u-boot,dm-pre-proper;
     
 	imxrt1050-zb {
-        u-boot,dm-pre-reloc;
+        u-boot,dm-pre-proper;
         
 		pinctrl_lpuart1: lpuart1grp {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 		};
 
 		pinctrl_semc: semcgrp {
-            u-boot,dm-pre-reloc;
+            u-boot,dm-pre-proper;
 		};
 	};
 };

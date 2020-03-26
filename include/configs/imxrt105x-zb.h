@@ -9,7 +9,7 @@
 
 #include <asm/arch/imx-regs.h>
 
-#define DEBUG                       (1)
+//#define DEBUG                       (1)
 #define CONFIG_SYS_INIT_SP_ADDR     0x80800000
 
 /*
