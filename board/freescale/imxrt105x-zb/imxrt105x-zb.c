@@ -13,6 +13,29 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
+static void BOARD_WriteU32(uint32_t addr, uint32_t val)
+{
+    *((volatile uint32_t*)addr) = val;
+}
+
+static uint32_t BOARD_ReadU32(uint32_t addr)
+{
+    return((uint32_t)(*((volatile uint32_t*)addr)));
+}
+
+int board_early_init_f(void)
+{
+    /*
+     * Fix: Explicitly disable sysTick
+     * I'm not sure why it's sometimes enabled and later causes
+     * __invalid_entry exception.
+     */
+    BOARD_WriteU32(0xE000E010, 0x00000004);
+
+    return 0;
+}
+
+
 int dram_init(void)
 {
 #ifndef CONFIG_SUPPORT_SPL

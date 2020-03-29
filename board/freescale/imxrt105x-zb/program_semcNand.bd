@@ -1,0 +1,72 @@
+
+# The source block assign file name to identifiers
+sources {
+ myBinFile = extern (0);
+}
+
+# The section block specifies the sequence of boot commands to be written to the SB file
+section (0) {
+
+    # Prepare SEMC NAND FCB option --------------------------------------------
+    # See MCUX Flashloader RM for more details
+    #
+    # NAND Option (offset: 0x00)
+    #   [31:28] Tag : 0xD
+    #   [27:18] Reserved : 0
+    #   [17] ECC Status : 0 (ECC is enabled)
+    #   [16] ECC Type : 0 (SW ECC)
+    #   [15] Reserved : 0
+    #   [14:12] PCS Port : 0b000 (CSX0)
+    #   [11:10] Reserved
+    #   [9:8] Data Port Size : 0b01 (8bits)
+    #   [7] Reserved : 0
+    #   [6:4] ONFI Timing Mode : 0b000 (Mode 0)
+    #   [3] EDO Mode : 0 (EDO Disabled)
+    #   [2:0] ONFI : 0b000 (Non-ONFI)
+    load 0xD0010101 > 0x2000;
+    
+    # FCB Option
+    #   [31:20] Reserved : 0
+    #   [19:16] Image Copies : 0b0001 (One Image Copy)
+    #   [15:8] Search Stride : 0b0001 (1 block)
+    #   [7:4] Reserved
+    #   [3:0] Search Count : 0b0001
+    load 0x00020102 > 0x2004;
+
+    # Image 0 Info (U-Boot1)
+    #   [31:16] Block Index : 0x0004 (image0 starts at block index 4)
+    #   [15:00] Block Count : 0x0010 (16 blocks == 2MB)
+    load 0x00040010 > 0x2008;
+
+    # Image 1 Info (U-Boot2)
+    #   [31:16] Block Index : 0x0014 (image1 starts at block index 20)
+    #   [15:00] Block Count : 0x0010 (16 blocks == 2MB)
+    load 0x00140010 > 0x200C;
+
+    enable semcnand 0x2000;
+    
+    # Erase flash -------------------------------------------------------------
+
+    # Erase Image0 at block index 4
+    # byte address = page size * pages per block * block index
+    # byte address = (2048 bytes/page) * (64 pages/block) * (index 4)
+    erase semcnand 0x80000..0x27FFFF;
+
+    # Erase Image1 at block index 20
+    # byte address = (2048 bytes/page) * (64 pages/block) * (index 20)
+    erase semcnand 0x280000..0x47FFFF;
+    
+    # Program image -----------------------------------------------------------
+    load semcnand myBinFile > 0x80000;
+    load semcnand myBinFile > 0x280000;
+
+    # Blow on-time program fuse (OCOTP) ---------------------------------------
+    # Boot Search Count: 2
+    # Boot Search Stride: 64 pages
+    # Boot Device: SEMC NAND
+    # ONFI Compliant
+    load fuse 0x00000021 > 0x5;
+
+    # Set BT_FUSE_SEL : 1
+    load fuse 0x00000010 > 0x6;
+}
