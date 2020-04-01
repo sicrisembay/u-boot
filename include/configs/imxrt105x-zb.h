@@ -41,4 +41,7 @@
  */
 #define CONFIG_SYS_MALLOC_LEN		(1 * 1024 * 1024)
 
+#define CONFIG_SYS_MAX_NAND_DEVICE  (1)
+#define CONFIG_SYS_NAND_BASE        (0x00000000)
+
 #endif /* __IMXRT105X_ZB_H */

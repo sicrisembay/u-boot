@@ -21,6 +21,7 @@
 	memory {
 		reg = <0x80000000 0x01000000>;
 	};
+	
 };
 
 &lpuart1 { /* console */
@@ -166,4 +167,31 @@
 		};
 
 	};
+};
+
+&nand0 {
+    page-size = <2048>;
+    oob-size = <64>;
+    page-per-block = <64>;
+    ecc-size = <512>;
+    ecc-bytes = <5>;
+
+    status = "okay";
+
+    partition@00000000 {
+        reg = <0x00000000 0x00080000>;
+        label = "bcb";
+    };
+    partition@00080000 {
+        reg = <0x00080000 0x00200000>;
+        label = "u-boot-1";
+    };
+    partition@00280000 {
+        reg = <0x00280000 0x00200000>;
+        label = "u-boot-2";
+    };
+    partition@00480000 {
+        reg = <0x00480000 0>;
+        label = "rootfs";
+    };
 };

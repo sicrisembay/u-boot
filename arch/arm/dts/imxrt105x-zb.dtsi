@@ -142,5 +142,14 @@
 			interrupt-controller;
 			#interrupt-cells = <2>;
 		};
+
+        nand0: semc-nand@402f0000 {
+            u-boot,dm-pre-proper;
+            compatible = "fsl,imxrt-semc-nand";
+            #address-cells = <1>;
+            #size-cells = <1>;
+            semc0 = <&semc>;
+            status = "disabled";
+		};
 	};
 };
