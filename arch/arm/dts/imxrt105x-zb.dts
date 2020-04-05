@@ -170,6 +170,16 @@
 };
 
 &nand0 {
+    /* SEMC NAND Control configuration for winbond NAND flash */
+    /* Check IMXRT datasheet for NANDCR0-3 description */
+    fsl,imxrt-nand-ctrl = <0x00000560   /* NANDCR0 */
+                    0x0047472A          /* NANDCR1 */
+                    0x20160813          /* NANDCR2 */
+                    0x00000000          /* NANDCR3 */
+                    0x0000001F>;        /* SEMC BR8 */
+    /* winbond NAND flash layout */
+    nand-bus-width = <8>;
+    nand-ecc-mode = "soft";
     page-size = <2048>;
     oob-size = <64>;
     page-per-block = <64>;
@@ -177,6 +187,8 @@
     ecc-bytes = <5>;
 
     status = "okay";
+
+    base-address = <0x00000000>;
 
     partition@00000000 {
         reg = <0x00000000 0x00080000>;

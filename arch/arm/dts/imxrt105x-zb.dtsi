@@ -149,6 +149,7 @@
             #address-cells = <1>;
             #size-cells = <1>;
             semc0 = <&semc>;
+            reg = <0x402f0000 0x100>;
             status = "disabled";
 		};
 	};
